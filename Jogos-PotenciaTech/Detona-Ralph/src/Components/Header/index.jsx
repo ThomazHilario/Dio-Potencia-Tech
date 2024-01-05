@@ -1,20 +1,24 @@
+import {useContext} from 'react'
+import { Context } from '../../Context'
 import './header.css'
+import player from '../../images/player.png'
 export const Header = () => {
+    const {points, timer, lives} = useContext(Context)
     return(
         <header>
             <div className='infoGame'>
                 <span className='title'>YOUR POINTS:</span>
-                <span id='points'>0</span>
+                <h2 id='points'>{points}</h2>
             </div>
 
             <div className='infoGame'>
                 <span className='title'>TIME LEFT:</span>
-                <span id='time'>00</span>
+                <h2 id='time'>60</h2>
             </div>
 
             <div className='infoGame'>
-                <img src="" alt="imagem de vidas" />
-                <span>X0</span>
+                <img src={player} alt="imagem de vidas" />
+                <h2 id='lives'>X{lives}</h2>
             </div>
         </header>
     )

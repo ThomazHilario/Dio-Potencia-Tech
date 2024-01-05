@@ -1,12 +1,19 @@
-import { useState } from 'preact/hooks'
+import { ContextProvider } from './Context'
 import { Header } from './Components/Header'
+import { MainGame } from './Components/MainGame'
 import './app.css'
 
 export const App = () => {
 
   return (
     <>
-      <Header/>
+      <ContextProvider>
+        {/* Componente Header */}
+        <Header/>
+
+        {/* Componente MainGame */}
+        <MainGame/>
+      </ContextProvider>
     </>
   )
 }

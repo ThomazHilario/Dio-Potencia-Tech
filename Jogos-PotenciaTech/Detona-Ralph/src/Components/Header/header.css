@@ -1,10 +1,11 @@
 header{
-    background-color: black;
-    border-bottom: 10px solid rgb(240, 240, 107);
-    height: 70px;
+    background-color: #000000;
+    border-bottom: 1.5vh solid rgb(240, 240, 107);
+    height: 12vh;
 
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 header > .infoGame > .title{
@@ -14,7 +15,7 @@ header > .infoGame > .title{
 }
 
 header > .infoGame > #points{
-    color: white;
+    color: #ffffff;
     display: block;
     margin-top: 5px;
     text-align: center;
@@ -27,4 +28,11 @@ header > .infoGame > #time{
     margin-top: 5px;
     text-align: center;
     font-size:20px
+}
+
+header > .infoGame:nth-child(3){
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
 }
