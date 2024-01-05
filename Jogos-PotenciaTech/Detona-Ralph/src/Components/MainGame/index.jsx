@@ -2,18 +2,32 @@ import './maingame.css'
 import {useContext} from 'react'
 import { Context } from '../../Context'
 
+const gameSettings = {
+    gameSpeed:600,
+}
+
 export const MainGame = () => {
 
     // Contextos globais
     const {points, setPoints, lives,setLives} = useContext(Context)
 
+    // getPoints
+    function getPoints(){
+        setPoints(points + 1)
+    }
+
+    //loseLives
+    function loseLives(){
+        setLives(lives - 1)
+    }
+
+
     // Click no painel
     function click(tag){
-
         if(tag.className.includes('ralph')){
-            setPoints(points + 1)
+            getPoints()
         } else{
-            setLives(lives - 1)
+            loseLives()
         }
         
     }
@@ -42,16 +56,20 @@ export const MainGame = () => {
                 <ul>
                     <li>Ao clicar em start o jogo irá começar.</li>
                     <li>Seu objetivo é clicar no quadro onde o Ralph está.</li>
-                    <li>Caso clique no quadro onde o Ralph nao está, perde uma vida de três.</li>
+                    <li>Caso clique no quadro onde o Ralph não está, perde uma vida de três.</li>
+                    <li>Lembrando que a cada 60 segundos passados temos o <strong>timeout</strong>, e a cada retorno do timeOut o tempo que o Ralph aparece é dividido em 1.25!</li>
                     <li>Faça a maior pontuação que puder! 😉</li>
                 </ul>
 
                 {/* Startar o jogo */}
-                <button id='startPlay' onClick={startPlaying}>Start</button>
+                <button className='buttonCss' id='startPlay' onClick={startPlaying}>Start</button>
             </div>
 
             {/* ModalGamerOverPlay */}
             <ModalGamerOverPlay points={points} setPoints={setPoints} setLives={setLives}/>
+
+            {/* TimeOutModal */}
+            <TimeOut points={points}/>
 
             {/* gameInterface */}
             <div id="gameInterface">
@@ -77,7 +95,7 @@ function ModalGamerOverPlay({points, setLives, setPoints}){
         setPoints(0)
         setLives(3)
 
-        // Alterando o display dos modais
+        // Alterando o display dos modalGamerOverPLay
         document.getElementById('modalGamerOverPlay').style.display = 'none'
 
         // Alterando o display da gameInterface
@@ -96,10 +114,46 @@ function ModalGamerOverPlay({points, setLives, setPoints}){
             <h3>Points:{points}</h3>
 
             {/* startGame */}
-            <button onClick={startPlayAgain}>Play Again</button>
+            <button className='buttonCss' onClick={startPlayAgain}>Play Again</button>
         </div>
     )
 }
+
+
+
+// Componente TimeOut
+function TimeOut({ points }){
+
+    // Retornando pos timeOut
+    function playReturn(){
+        gameSettings.gameSpeed / 1.25
+
+        // Alterando o display dos timeOutModal
+        document.getElementById('timeOutModal').style.display = 'none'
+
+        // Alterando o display dos gameInterface
+        document.getElementById('gameInterface').style.display = 'grid'
+
+        // Startando game
+        startGame()
+    }
+
+    return(
+        <div id='timeOutModal'>
+            {/* Titulo */}
+            <h2>TimeOut</h2>
+
+            {/* Points */}
+            <h3>points:{points}</h3>
+
+            <button className='buttonCss' onClick={playReturn}>Return Play in 2x Speed</button>
+        </div>
+    )
+}
+
+
+
+
 // Função que será executada durante um intervalo de tempo
 function initLoad(){
 
@@ -116,10 +170,10 @@ function initLoad(){
 
 }
 
-// Starggame
+// StartGame
 function startGame(){
     // Executando o detonaalph
-    const detonaRalph = setInterval(initLoad, 600)
+    const detonaRalph = setInterval(initLoad, gameSettings.gameSpeed)
     
     // Executando o timerSeconds
     const timerSeconds = setInterval(() => {
@@ -136,11 +190,12 @@ function startGame(){
             clearInterval(timerSeconds)
 
             // Alterando display do modal e da gameInterface
-            document.getElementById('modalStart').style.display = 'flex'
+            document.getElementById('timeOutModal').style.display = 'flex'
             document.getElementById('gameInterface').style.display = 'none'
 
             // Alterando o valor do tempo para 60 segundos
             document.getElementById('time').textContent = '60'
+
         } else if(document.getElementById('lives').textContent === 'X0'){
 
             // limpando os intervalos de tempo do timer e do detona ralph
