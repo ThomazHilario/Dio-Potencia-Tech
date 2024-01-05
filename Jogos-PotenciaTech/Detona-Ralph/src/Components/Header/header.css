@@ -1,0 +1,30 @@
+header{
+    background-color: black;
+    border-bottom: 10px solid rgb(240, 240, 107);
+    height: 70px;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+header > .infoGame > .title{
+    color: rgb(243, 73, 73);
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+header > .infoGame > #points{
+    color: white;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    font-size:20px
+}
+
+header > .infoGame > #time{
+    color: white;
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+    font-size:20px
+}
