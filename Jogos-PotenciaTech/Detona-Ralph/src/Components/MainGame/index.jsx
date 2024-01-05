@@ -117,7 +117,7 @@ function initLoad(){
 // Starggame
 function startGame(){
     // Executando o detonaalph
-    const detonaRalph = setInterval(initLoad, 800)
+    const detonaRalph = setInterval(initLoad, 600)
     
     // Executando o timerSeconds
     const timerSeconds = setInterval(() => {
