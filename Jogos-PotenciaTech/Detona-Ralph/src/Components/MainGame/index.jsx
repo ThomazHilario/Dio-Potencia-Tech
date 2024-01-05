@@ -1,5 +1,5 @@
 import './maingame.css'
-import {useContext, useState} from 'react'
+import {useContext} from 'react'
 import { Context } from '../../Context'
 
 export const MainGame = () => {
@@ -26,6 +26,7 @@ export const MainGame = () => {
         
         startGame()
     }
+
     return(
         <main>
 
@@ -35,14 +36,14 @@ export const MainGame = () => {
                 <h1>Bem-vindo ao jogo</h1>
 
                 {/* paragrafo de regra */}
-                <p>Regras:</p>
+                <h2>Regras:</h2>
 
                 {/* Regras */}
                 <ul>
-                    <li>Ao clicar em start o jogo comecara.</li>
-                    <li>Seu objetivo e clicar no quadro onde o ralph esta.</li>
-                    <li>Clicar no quadro onde o ralph nao esta perde uma vida de 3.</li>
-                    <li>Faca a maior pontuacao que puder.</li>
+                    <li>Ao clicar em start o jogo irá começar.</li>
+                    <li>Seu objetivo é clicar no quadro onde o Ralph está.</li>
+                    <li>Caso clique no quadro onde o Ralph nao está, perde uma vida de três.</li>
+                    <li>Faça a maior pontuação que puder! 😉</li>
                 </ul>
 
                 {/* Startar o jogo */}
@@ -52,6 +53,7 @@ export const MainGame = () => {
             {/* ModalGamerOverPlay */}
             <ModalGamerOverPlay points={points} setPoints={setPoints} setLives={setLives}/>
 
+            {/* gameInterface */}
             <div id="gameInterface">
                 <div className="painel" id='0' onClick={(e) => click(e.target)}></div>
                 <div className="painel" id='1' onClick={(e) => click(e.target)}></div>
