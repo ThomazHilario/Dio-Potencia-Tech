@@ -154,8 +154,9 @@ function emojiequalemoji(){
     })
 
     // Removendo os dois emojis do array
-    arrayVerification.pop()
-    arrayVerification.pop()
+    for(let i = 0;i <= arrayVerification.length;i++){
+        arrayVerification.splice(i)
+    }
 }
 
 // Função que compara emojis diferentes
@@ -186,7 +187,8 @@ function emojiDifferentEmoji(){
     // Removendo os dois emojis do array
     setTimeout(() => {
         
-        arrayVerification.pop()
-        arrayVerification.pop()
+        for(let i = 0;i <= arrayVerification.length;i++){
+            arrayVerification.splice(i)
+        }
     },800)
 }
