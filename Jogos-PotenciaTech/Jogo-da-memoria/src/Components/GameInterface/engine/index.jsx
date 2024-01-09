@@ -163,11 +163,12 @@ function emojiDifferentEmoji(){
 
         // Caso o painelSpan tenha o mesmo texto do array da posicao 0 e 1 ambos receberao display none
         if(painelSpan.textContent.includes(arrayVerification[0]) || painelSpan.textContent.includes(arrayVerification[1])){
-            // Depois de meio segundo o display do span recebe none
+            
             setTimeout(() => {
                 // Alterando o rotate para o valor de 180deg
                 painel.style.webkitTransform = `rotateY(180deg)`
 
+                // Alterando o display do span recebe none
                 painelSpan.style.display = 'none'
             },800)
 
