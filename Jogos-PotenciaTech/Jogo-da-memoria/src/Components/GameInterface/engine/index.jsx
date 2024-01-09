@@ -140,6 +140,11 @@ function emojiequalemoji(){
             for(let i = 0; i < allEmoji.length; i++){
                 allEmoji.splice(i)
             }
+
+            // Alterando o rotateY dos paineis para 180deg
+            paineis.forEach(painel => {
+                painel.style.webkitTransform = `rotateY(180deg)`
+            })
         }
 
     })
