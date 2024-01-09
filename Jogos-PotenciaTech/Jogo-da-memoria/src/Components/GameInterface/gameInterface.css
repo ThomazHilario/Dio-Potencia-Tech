@@ -3,6 +3,12 @@
     width: 120px;
     background-color: black;
     border: 1px solid gray;
+    cursor: pointer;
+}
+
+.painel > span{
+    font-size: 50px;
+    display: none;
 }
 #gameInterface{
     display: none;
