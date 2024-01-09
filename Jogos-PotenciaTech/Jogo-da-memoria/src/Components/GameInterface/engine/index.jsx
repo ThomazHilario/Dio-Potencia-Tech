@@ -166,7 +166,7 @@ function emojiDifferentEmoji(){
             // Depois de meio segundo o display do span recebe none
             setTimeout(() => {
                 // Adicionando rotate 180deg ao painel 
-                painel.style.webkitTransform = `rotate(180deg)`
+                painel.style.webkitTransform = `rotateY(180deg)`
 
                 // Alterando o display para none
                 painelSpan.style.display = 'none'
