@@ -83,6 +83,8 @@ export function clickPainel(painel){
     // Jogando o valor para dentro do array
     arrayVerification.push(emojiSelected)
 
+    painel.style.webkitTransform = `rotateY(0deg)`
+
     // Lógica condicional
     if(arrayVerification.length == 2){
 
@@ -162,7 +164,14 @@ function emojiDifferentEmoji(){
         // Caso o painelSpan tenha o mesmo texto do array da posicao 0 e 1 ambos receberao display none
         if(painelSpan.textContent.includes(arrayVerification[0]) || painelSpan.textContent.includes(arrayVerification[1])){
             // Depois de meio segundo o display do span recebe none
-            setTimeout(() => painelSpan.style.display = 'none',500)
+            setTimeout(() => {
+                // Alterando o rotate para o valor de 180deg
+                painel.style.webkitTransform = `rotateY(180deg)`
+
+                painelSpan.style.display = 'none'
+            },800)
+
+            
         }
     })
 
