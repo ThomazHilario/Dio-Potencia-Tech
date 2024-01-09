@@ -1,0 +1,10 @@
+.painel{
+    height: 120px;
+    width: 120px;
+    background-color: black;
+    border: 1px solid gray;
+}
+#gameInterface{
+    display: none;
+    grid-template-columns: 120px 120px 120px 120px;
+}
