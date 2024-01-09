@@ -74,16 +74,20 @@ const allEmoji = []
 
 // clickPainel
 export function clickPainel(painel){
-    // Alterando o display do span
-    painel.firstElementChild.style.display = 'block'
+    // Caso o total de elementos do arrayVerification seja menor que 2
+    if(arrayVerification.length < 2){
+        // Alterando o display do span
+        painel.firstElementChild.style.display = 'block'
 
-    // Pegando o emoji do span
-    const emojiSelected = painel.firstElementChild.textContent
+        // Pegando o emoji do span
+        const emojiSelected = painel.firstElementChild.textContent
 
-    // Jogando o valor para dentro do array
-    arrayVerification.push(emojiSelected)
+        // Jogando o valor para dentro do array
+        arrayVerification.push(emojiSelected)
 
-    painel.style.webkitTransform = `rotateY(0deg)`
+        // Alterando o rotateY para 0deg
+        painel.style.webkitTransform = `rotateY(0deg)`
+    }
 
     // Lógica condicional
     if(arrayVerification.length == 2){
@@ -178,8 +182,11 @@ function emojiDifferentEmoji(){
             },800)
         }
     })
-
+    
     // Removendo os dois emojis do array
-    arrayVerification.pop()
-    arrayVerification.pop()
+    setTimeout(() => {
+        
+        arrayVerification.pop()
+        arrayVerification.pop()
+    },800)
 }
