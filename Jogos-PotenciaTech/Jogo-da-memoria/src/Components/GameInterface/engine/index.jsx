@@ -15,11 +15,10 @@ function shuffle(array){
     return array
 }
 
-
 // Startando game
 export function gameStart(){
 
-    // Array de emojiss
+    // Array de emojis
     const emojis = [
         '🐺',
         '🐺',
@@ -35,7 +34,7 @@ export function gameStart(){
         '🐱'
     ]
 
-    // Novo array com os valores aleatorios
+    // Novo array com os valores aleátorios
     let newArray = shuffle(emojis)
 
     // Pegando todos os paineis
@@ -44,10 +43,16 @@ export function gameStart(){
     // Percorrendo paineis
     paineis.forEach(painel => {
 
+        // removendo o disabled
+        painel.removeAttribute('disabled')
+
+        // Alterando o display dos spans
+        painel.firstElementChild.style.display = 'none'
+
         // Escolhendo um emoji aleatorio do array
         const randomItemIndex = Math.floor(Math.random() * newArray.length)
 
-        // Adicionando ao span o valor aleatorio
+        // Adicionando ao span o valor aleátorio
         painel.firstElementChild.textContent = newArray[randomItemIndex]
 
         // retirando o emoji do array
@@ -61,9 +66,13 @@ export function gameStart(){
     document.getElementById('gameInterface').style.display = 'grid'
 }
 
-// array de verificacao
+// array de verificação.
 const arrayVerification = []
 
+// Array que vai contar quantos emojis foram achados.
+const allEmoji = []
+
+// clickPainel
 export function clickPainel(painel){
     // Alterando o display do span
     painel.firstElementChild.style.display = 'block'
@@ -71,58 +80,93 @@ export function clickPainel(painel){
     // Pegando o emoji do span
     const emojiSelected = painel.firstElementChild.textContent
 
-    
-
     // Jogando o valor para dentro do array
     arrayVerification.push(emojiSelected)
-console.log(arrayVerification[0] === arrayVerification[1],arrayVerification)
-    // Logica condicional
-    if(arrayVerification.length == 2){
 
-        // capturando paineis
-        const paineis = document.querySelectorAll('.painel')
+    // Lógica condicional
+    if(arrayVerification.length == 2){
 
         if(arrayVerification[0] === arrayVerification[1]){
 
-            // Percorrendo Paineis
-            paineis.forEach(painel => {
-
-                //Pegando o span dentro do painel
-                const painelSpan = painel.firstElementChild
-
-                // Caso o texto contido do painel seja o mesmo do array ele ficara block
-                if(painelSpan.textContent.includes(arrayVerification[0])){
-
-                    // Alterando o display do painelSpan para block 
-                    painelSpan.style.display = 'block'
-
-                    // Deixando o button desativado
-                    painel.setAttribute('disabled',false)
-                }
-            })
-
-            // Removendo os dois emojis do array
-            arrayVerification.pop()
-            arrayVerification.pop()
+            // executando emojiequalemoji
+            emojiequalemoji()
 
         }else{
 
-            // Percorrendo paineis
-            paineis.forEach(painel => {
-
-                // Pegando o span dentro do painel
-                const painelSpan = painel.firstElementChild
-
-                // Caso o painelSpan tenha o mesmo texto do array da posicao 0 e 1 ambos receberao display none
-                if(painelSpan.textContent.includes(arrayVerification[0]) || painelSpan.textContent.includes(arrayVerification[1])){
-                    // Depois de meio segundo o display do span recebe none
-                    setTimeout(() => painelSpan.style.display = 'none',500)
-                }
-            })
-
-            // Removendo os dois emojis do array
-            arrayVerification.pop()
-            arrayVerification.pop()
+            // Executando emojiDifferentEmoji
+            emojiDifferentEmoji()
         }
+    
     }
+
+}
+
+// Função que compara emojis iguais
+function emojiequalemoji(){
+
+    // capturando paineis
+    const paineis = document.querySelectorAll('.painel')
+
+    // Percorrendo Paineis
+    paineis.forEach(painel => {
+
+        //Pegando o span dentro do painel
+        const painelSpan = painel.firstElementChild
+
+        // Caso o texto contido do painel seja o mesmo do array ele ficara block
+        if(painelSpan.textContent.includes(arrayVerification[0])){
+
+            // Alterando o display do painelSpan para block 
+            painelSpan.style.display = 'block'
+
+            // Deixando o button desativado
+            painel.setAttribute('disabled',false)
+
+            // Adicionando emoji ao array de emoji
+            allEmoji.push(painelSpan.textContent)
+        }
+
+        if(allEmoji.length === 12){
+
+            // Alterando o display do buttonStartGame
+            document.getElementById('buttonStartGame').style.display = 'block'
+
+            // Alterando o display da gameInterface
+            document.getElementById('gameInterface').style.display = 'none'
+
+            // Removendo todos os emojis do allEmojis
+            for(let i = 0; i < allEmoji.length; i++){
+                allEmoji.splice(i)
+            }
+        }
+
+    })
+
+    // Removendo os dois emojis do array
+    arrayVerification.pop()
+    arrayVerification.pop()
+}
+
+// Função que compara emojis diferentes
+function emojiDifferentEmoji(){
+
+    // capturando paineis
+    const paineis = document.querySelectorAll('.painel')
+
+    // Percorrendo paineis
+    paineis.forEach(painel => {
+
+        // Pegando o span dentro do painel
+        const painelSpan = painel.firstElementChild
+
+        // Caso o painelSpan tenha o mesmo texto do array da posicao 0 e 1 ambos receberao display none
+        if(painelSpan.textContent.includes(arrayVerification[0]) || painelSpan.textContent.includes(arrayVerification[1])){
+            // Depois de meio segundo o display do span recebe none
+            setTimeout(() => painelSpan.style.display = 'none',500)
+        }
+    })
+
+    // Removendo os dois emojis do array
+    arrayVerification.pop()
+    arrayVerification.pop()
 }
