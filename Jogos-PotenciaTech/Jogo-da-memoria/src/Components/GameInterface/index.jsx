@@ -1,5 +1,6 @@
 import './gameInterface.css'
 import { clickPainel } from './engine'
+
 export const GameInterface = () => {
     return(
         <div id="gameInterface">
