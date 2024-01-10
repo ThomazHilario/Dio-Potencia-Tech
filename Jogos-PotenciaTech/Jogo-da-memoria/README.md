@@ -3,6 +3,6 @@
 ## Tecnologias usadas para o desenvolvimento do jogo:
 * React
 
-## Rodar o projetoÇ
+## Rodar o projeto:
 - Basta clona-lo na sua máquina
 - E no terminal de preferência usar o comando: npm run dev
