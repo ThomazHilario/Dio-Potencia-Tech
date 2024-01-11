@@ -7,7 +7,6 @@
 
 ## Tecnologias utilizadas:
 * React
-* Async Await - Para pegar as cartas.
 
 ## Pré-requisitos e como rodar a aplicação/testes:
 * Clone o projeto em sua máquina.
