@@ -2,6 +2,7 @@
 #MainGame{
     height: 100vh;
     display: flex;
+
 }
 /* ContainerLeft */
 #ContainerLeft{
@@ -70,12 +71,16 @@
 
 /* ContainerRight */
 #ContainerRight{
-    background-color: blue;
     height: 100%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-image: url('../../assets/images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-shadow: inset 1px 1px 1px 400px rgba(0, 0, 0, 0.653);
 }
 
 /* Container das cartas */

@@ -242,7 +242,7 @@ const ContainerRight = () => {
     }
 
 
-    return(
+    return(         
         <div id="ContainerRight">
 
             {/* button start Game */}
@@ -263,29 +263,31 @@ const ContainerRight = () => {
 
             {/* template de combate */}
             <div id='templateCombate'>
-                {/* Visualizando minha carta ao escolher */}
-                <div id='myCard' className='templateCardGame'></div>
 
-                    {/* Detalhe */}
-                    <img src={eye}/>
+            {/* Visualizando minha carta ao escolher */}
+            <div id='myCard' className='templateCardGame'></div>
 
-                    {/* Visualizando a carta do bot ao escolher */}
+                {/* Detalhe */}
+                <img src={eye}/>
+
+                {/* Visualizando a carta do bot ao escolher */}
                 <div id='botCard' className='templateCardGame'></div>
+
             </div>
-            
+                
             <button id='resetGame' onClick={resetGameCard}></button>
 
             {/* Container card do player */}
             <div id='containerCardsPlayer' className='containerCardsGame'>
 
-                {/* Percorrendo minhas cartas */}
-                {myCards.length > 0 && myCards.map((element) => {
-                    return(
-                        <img key={element.id} src={cardBack} onClick={() => verifyConditionWin(element)} onMouseOver={() => setVisualization(element)}/>
+            {/* Percorrendo minhas cartas */}
+            {myCards.length > 0 && myCards.map((element) => {
+                return(
+                    <img key={element.id} src={cardBack} onClick={() => verifyConditionWin(element)} onMouseOver={() => setVisualization(element)}/>
                     )
                 })}
 
             </div>
-        </div>
+        </div> 
     )
 }
