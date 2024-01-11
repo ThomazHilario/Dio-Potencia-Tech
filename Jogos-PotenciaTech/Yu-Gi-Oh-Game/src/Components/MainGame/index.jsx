@@ -1,4 +1,5 @@
 import './maingame.css'
+import Ost from '../../assets/songs/hunter.mp3'
 import cardBack from '../../assets/images/card-back.png'
 import eye from '../../assets/images/millenium2.png'
 import {useContext, useState, useEffect, useMemo} from 'react'
@@ -121,8 +122,25 @@ const ContainerRight = () => {
 
     }
 
+    // SongBattle
+    function audioPlay(url){
+        // Instanciando o audio
+        const audio = new Audio(url)
+
+        // volume do audio
+        audio.volume = 0.2
+    
+        // Executando audio
+        audio.play()
+
+        // Deixando o audio em loop
+        audio.loop = true
+    }
+
     // startGame - Comecando o jogo
     function startGame(){
+    
+        audioPlay(Ost)
 
         // Chamando o getCards
         getCards()
@@ -274,7 +292,8 @@ const ContainerRight = () => {
                 <div id='botCard' className='templateCardGame'></div>
 
             </div>
-                
+            
+            {/* Button resetGame */}
             <button id='resetGame' onClick={resetGameCard}></button>
 
             {/* Container card do player */}

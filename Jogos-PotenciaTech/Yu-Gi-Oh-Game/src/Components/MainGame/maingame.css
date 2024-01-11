@@ -80,7 +80,7 @@
     background-image: url('../../assets/images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    box-shadow: inset 1px 1px 1px 400px rgba(0, 0, 0, 0.653);
+    box-shadow: inset 1px 1px 1px 500px rgba(0, 0, 0, 0.653);
 }
 
 /* Container das cartas */
