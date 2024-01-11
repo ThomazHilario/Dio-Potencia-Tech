@@ -246,7 +246,7 @@ const ContainerRight = () => {
         <div id="ContainerRight">
 
             {/* button start Game */}
-            <button id='btn-Start-Game' onClick={startGame}>Game Start</button>
+            <button id='btn-Start-Game' onClick={startGame}>Start Game</button>
 
             {/* Container cards do bot */}
             <div id='containerCardsBot' className='containerCardsGame'>
