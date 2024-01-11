@@ -10,7 +10,7 @@
     height: 100%;
     width: 400px;
 
-    display: flex;
+    display: none;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
@@ -52,5 +52,21 @@
 #ContainerRight{
     background-color: blue;
     height: 100%;
-    width: calc(100% - 400px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#btn-Start-Game{
+    height: 45px;
+    width: 220px;
+    background-color: rgb(165, 141, 21);
+    border-radius: 5px;
+    border: 0px;
+
+    font-weight: bold;
+    font-size: 30px;
+
+    cursor: pointer;
 }
