@@ -1,8 +1,8 @@
-
+import { MainGame } from "./Components/MainGame"
 const App = () => {
   return (
     <>
-      
+      <MainGame/>
     </>
   )
 }

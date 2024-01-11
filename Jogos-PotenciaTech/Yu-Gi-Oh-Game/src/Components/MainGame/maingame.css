@@ -1,0 +1,18 @@
+/* maingame */
+#MainGame{
+    height: 100vh;
+    display: flex;
+}
+
+#ContainerLeft{
+    background-color: rgb(165, 141, 21);
+    height: 100%;
+    width: 400px;
+}
+
+/* ContainerRight */
+#ContainerRight{
+    background-color: blue;
+    height: 100%;
+    width: calc(100% - 400px);
+}
