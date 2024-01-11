@@ -5,4 +5,7 @@
 
 button{
   cursor: pointer;
+  background-image: url('../src/assets/images/b');
+  background-size: contain;
+  background-position: center center;
 }
