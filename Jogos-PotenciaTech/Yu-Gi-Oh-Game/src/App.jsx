@@ -1,8 +1,15 @@
 import { MainGame } from "./Components/MainGame"
+import { ContextGame } from "./Context"
 const App = () => {
   return (
     <>
-      <MainGame/>
+      {/* ContextGame */}
+      <ContextGame>
+
+        {/* Componente MainGame */}
+        <MainGame/>
+        
+      </ContextGame>
     </>
   )
 }
