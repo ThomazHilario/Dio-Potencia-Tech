@@ -86,7 +86,7 @@
 /* Container das cartas */
 .containerCardsGame{
     display: flex;
-    gap: 20px;
+    gap: 60px;
 }
 
 /* Tamanho das img das cartas */

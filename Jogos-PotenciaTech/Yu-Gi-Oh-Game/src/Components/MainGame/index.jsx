@@ -8,6 +8,7 @@ import { Context } from '../../Context'
 export const MainGame = () => {
     return(
         <main id="MainGame">
+
             {/* Componente ContainerLeft */}
             <ContainerLeft/>
 
@@ -128,7 +129,7 @@ const ContainerRight = () => {
         const audio = new Audio(url)
 
         // volume do audio
-        audio.volume = 0.2
+        audio.volume = 0.06
     
         // Executando audio
         audio.play()
