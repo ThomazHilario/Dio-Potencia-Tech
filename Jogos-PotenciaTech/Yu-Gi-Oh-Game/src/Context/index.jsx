@@ -12,8 +12,9 @@ export const ContextGame = ({children}) => {
     // State - contLoser
     const [contLoser, setContLoser] = useState(0)
 
+    const [visualization, setVisualization] = useState(null)
     return(
-        <Context.Provider value={{contWin, setContWin, contLoser, setContLoser}}>
+        <Context.Provider value={{contWin, setContWin, contLoser, setContLoser, visualization, setVisualization}}>
             {children}
         </Context.Provider>
     )

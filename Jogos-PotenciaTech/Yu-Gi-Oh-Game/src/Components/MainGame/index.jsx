@@ -1,5 +1,7 @@
 import './maingame.css'
-import {useContext, useState, useEffect} from 'react'
+import cardBack from '../../assets/images/card-back.png'
+import eye from '../../assets/images/millenium2.png'
+import {useContext, useState, useEffect, useMemo} from 'react'
 import { Context } from '../../Context'
 
 export const MainGame = () => {
@@ -19,6 +21,9 @@ const ContainerLeft = () => {
     // States globais - win e lose
     const {contWin, contLoser} = useContext(Context)
 
+    // state - visualization
+    const {visualization} = useContext(Context)
+
     return(
         <div id="ContainerLeft">
 
@@ -30,18 +35,25 @@ const ContainerLeft = () => {
 
             {/* Card */}
             <div id='cardVisualization'>
-
+                <img src={visualization ? visualization.card_images[0].image_url : cardBack}/>
             </div>
 
             {/* Attributes card */}
-            <div id='attributesCard'></div>
+            <div id='attributesCard'>
+                <h1>{visualization && visualization.name}</h1>
+                <h1>{visualization && 'Ataque: ' +visualization.atk}</h1>
+            </div>
         </div>
     )
 }
 
+// array Verification
+const verification = []
+
 // Componente ContainerRight 
 const ContainerRight = () => {
 
+    // Fazendo requisicao antes do componente ser renderizado
     useEffect(() => {
         // loadCards
         async function loadCards(){
@@ -52,7 +64,7 @@ const ContainerRight = () => {
             const data = await response.json()
 
             // Filtrando o resultado para vim somente monstros
-            const cardsMonster = data.data.filter(element => element.type !== 'Spell Card')
+            const cardsMonster = data.data.filter(element => element.type !== 'Spell Card' && element.type !== 'Trap Card')
 
             // setando na state cards
             setCards([...cardsMonster])
@@ -67,11 +79,17 @@ const ContainerRight = () => {
     // Cartas do jogo
     const [cards, setCards] = useState([])
 
+    //cartas cache
+    const cardsCache = useMemo(() => cards,[cards])
+
     // state - myCards
     const [myCards, setMyCards] = useState([])
 
     // state - botCards
     const [botCards, setBotCards] = useState([])
+
+    // state - visualization
+    const {setVisualization, contWin, setContWin, contLoser, setContLoser} = useContext(Context)
 
     // Escolehndo cinco cartas random para o bot e para o player
     function randomCards(array){
@@ -84,7 +102,7 @@ const ContainerRight = () => {
         }
 
         for(let i = 0; i < 5; i++){
-            array.push(cards[Math.floor(Math.random() * cards.length)])
+            array.push(cardsCache[Math.floor(Math.random() * cards.length)])
         }
 
         
@@ -103,6 +121,7 @@ const ContainerRight = () => {
     }
 
     function startGame(){
+
         // Chamando o getCards
         getCards()
 
@@ -113,15 +132,120 @@ const ContainerRight = () => {
         document.getElementById('ContainerLeft').style.display = 'flex'
 
         // Alterando a width do ContainerRight
-        document.getElementById('ContainerRight').style.width = `calc(100% - 400px})`
+        document.getElementById('ContainerRight').style.width = `calc(100% - 500px})`
+
+        // Alterando o sentido do flex-direction
+        document.getElementById('ContainerRight').style.flexDirection = 'column'
+
+        // Alterando o alinhamento na vertical
+        document.getElementById('ContainerRight').style.justifyContent = 'space-evenly'
+
+        // Alterando o display do combateTemplate para flex
+        document.getElementById('templateCombate').style.display = 'flex'
     }
-    
+
+    function verifyConditionWin(element){
+
+        // Jogando a carta de minha escolha para o array de verificacao
+        verification.push(element)
+
+        // Jogando a carta aleatoria do bot ao array de verificacao
+        verification.push(botCards[Math.floor(Math.random() * botCards.length)])
+        
+        // Mostrando a minha carta no template
+        document.getElementById('myCard').innerHTML = `<img src="${verification[0].card_images[0].image_url}" />`
+
+        // Mostrando a carta do bot no template
+        document.getElementById('botCard').innerHTML = `<img src="${verification[1].card_images[0].image_url}" />`
+
+        // Condicao de vitoria
+        if(verification[0].atk > verification[1].atk){
+            
+            // button dizendo que ganhei
+            document.getElementById('resetGame').style.display = 'block'
+
+            // Mensagem de vitoria
+            document.getElementById('resetGame').textContent = 'Ganhou'
+
+            // Removendo as cartas do array de verificacao
+            verification.pop()
+            verification.pop()
+
+            // Incrementando ponto de vitoria
+            setContWin(contWin + 1)
+
+        } else{
+            // button dizendo que ganhei
+            document.getElementById('resetGame').style.display = 'block'
+
+            // Mensagem de derrota
+            document.getElementById('resetGame').textContent = 'Perdeu'
+
+            // Removendo as cartas do array de verificao
+            verification.pop()
+            verification.pop()
+
+            // Incrementando ponto de derrota
+            setContLoser(contLoser + 1)
+        }
+
+    }
+
+    function resetGameCard(){
+        // Chamando getCards
+        getCards()
+
+        // Mostrando a minha carta no template
+        document.getElementById('myCard').innerHTML = ``
+
+        // Mostrando a carta do bot no template
+        document.getElementById('botCard').innerHTML = ``
+    }
+
+
     return(
         <div id="ContainerRight">
             {/* button start Game */}
-          <button id='btn-Start-Game' onClick={startGame}>Game Start</button>
+            <button id='btn-Start-Game' onClick={startGame}>Game Start</button>
 
-          
+            {/* Container cards do bot */}
+            <div id='containerCardsBot' className='containerCardsGame'>
+
+                {/* Percorrendo as cartas do bot */}
+                {botCards.length > 0 && botCards.map((element) => {
+                    return(
+                        <img key={element.id} src={cardBack}/>
+                    )
+                })}
+
+            </div>
+
+
+            {/* template de combate */}
+            <div id='templateCombate'>
+                {/* Visualizando minha carta ao escolher */}
+                <div id='myCard' className='templateCardGame'></div>
+
+                    {/* Detalhe */}
+                    <img src={eye}/>
+
+                    {/* Visualizando a carta do bot ao escolher */}
+                <div id='botCard' className='templateCardGame'></div>
+            </div>
+            
+            <button id='resetGame' onClick={resetGameCard}></button>
+
+            {/* Container card do player */}
+            <div id='containerCardsPlayer' className='containerCardsGame'>
+
+                {/* Percorrendo minhas cartas */}
+                {myCards.length > 0 && myCards.map((element) => {
+                    return(
+                        <img key={element.id} src={cardBack} onClick={() => verifyConditionWin(element)} onMouseOver={() => setVisualization(element)}/>
+                    )
+                })}
+
+            </div>
         </div>
     )
 }
