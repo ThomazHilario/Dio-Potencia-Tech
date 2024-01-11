@@ -1,8 +1,14 @@
-# React + Vite
+# Yu-Gi-Oh - Game 
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descrição:
+* Jogo inspirado no anime de yu-gi-oh.
+* Durante o jogo o player e o bot terão cinco cartas aleatórias do universo do yu-gi-oh (somente cartas de monstro).
+* Ganha aquele que tiver a maior carta de atk.
 
-Currently, two official plugins are available:
+## Tecnologias utilizadas:
+* React
+* Async Await - Para pegar as cartas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Pré-requisitos e como rodar a aplicação/testes:
+* Clone o projeto em sua máquina.
+* Em um terminal de preferência use o comando: npm run dev.
