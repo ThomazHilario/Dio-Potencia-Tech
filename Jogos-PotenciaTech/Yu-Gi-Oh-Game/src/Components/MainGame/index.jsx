@@ -108,6 +108,7 @@ const ContainerRight = () => {
         
     }
 
+    // getCards - Pegando as cartas aleatorias para o player e para o bot
     function getCards(){
 
         // Chamando o randomCards para escolher as cartas do bot e setando na state
@@ -120,6 +121,7 @@ const ContainerRight = () => {
 
     }
 
+    // startGame - Comecando o jogo
     function startGame(){
 
         // Chamando o getCards
@@ -144,13 +146,23 @@ const ContainerRight = () => {
         document.getElementById('templateCombate').style.display = 'flex'
     }
 
+    // verifyConditionWin - verificando condicao de vitoria
     function verifyConditionWin(element){
+
+        // Ocultando containerCardsBot
+        document.getElementById('containerCardsBot').style.display ='none'
+
+        // Ocultando containerCardsPLayer
+        document.getElementById('containerCardsPlayer').style.display ='none'
+
+        
 
         // Jogando a carta de minha escolha para o array de verificacao
         verification.push(element)
 
-        // Jogando a carta aleatoria do bot ao array de verificacao
-        verification.push(botCards[Math.floor(Math.random() * botCards.length)])
+        // Jogando a carta aleatoria do bot ao array de verificacao    
+        verification.push(botCards.sort((a,b) => b.atk - a.atk)[0])
+
         
         // Mostrando a minha carta no template
         document.getElementById('myCard').innerHTML = `<img src="${verification[0].card_images[0].image_url}" />`
@@ -158,32 +170,34 @@ const ContainerRight = () => {
         // Mostrando a carta do bot no template
         document.getElementById('botCard').innerHTML = `<img src="${verification[1].card_images[0].image_url}" />`
 
+
+
         // Condicao de vitoria
         if(verification[0].atk > verification[1].atk){
-            
+
             // button dizendo que ganhei
             document.getElementById('resetGame').style.display = 'block'
 
             // Mensagem de vitoria
-            document.getElementById('resetGame').textContent = 'Ganhou'
-
-            // Removendo as cartas do array de verificacao
-            verification.pop()
-            verification.pop()
+            document.getElementById('resetGame').textContent = 'GANHOU'
 
             // Incrementando ponto de vitoria
             setContWin(contWin + 1)
 
-        } else{
+        } else if(verification[0].atk === verification[1].atk){
+
             // button dizendo que ganhei
             document.getElementById('resetGame').style.display = 'block'
 
             // Mensagem de derrota
-            document.getElementById('resetGame').textContent = 'Perdeu'
+            document.getElementById('resetGame').textContent = 'Empate'
 
-            // Removendo as cartas do array de verificao
-            verification.pop()
-            verification.pop()
+        }else{
+            // button dizendo que ganhei
+            document.getElementById('resetGame').style.display = 'block'
+
+            // Mensagem de derrota
+            document.getElementById('resetGame').textContent = 'PERDEU'
 
             // Incrementando ponto de derrota
             setContLoser(contLoser + 1)
@@ -191,20 +205,46 @@ const ContainerRight = () => {
 
     }
 
+    // resetGameCard - Recomecando o jogo
     function resetGameCard(){
+
         // Chamando getCards
         getCards()
 
-        // Mostrando a minha carta no template
+
+
+        // Resetando o valor interno
         document.getElementById('myCard').innerHTML = ``
 
-        // Mostrando a carta do bot no template
+        // Resetando o valor interno
         document.getElementById('botCard').innerHTML = ``
+
+
+
+        // Alterando o display do button para none
+        document.getElementById('resetGame').style.display = 'none'
+
+
+
+        // Removendo as cartas do array de verificacao
+        verification.pop()
+        verification.pop()
+
+
+
+        // Ocultando containerCardsBot
+        document.getElementById('containerCardsBot').style.display = 'flex'
+
+        // Ocultando containerCardsPlayer
+        document.getElementById('containerCardsPlayer').style.display = 'flex'
+
+
     }
 
 
     return(
         <div id="ContainerRight">
+
             {/* button start Game */}
             <button id='btn-Start-Game' onClick={startGame}>Game Start</button>
 

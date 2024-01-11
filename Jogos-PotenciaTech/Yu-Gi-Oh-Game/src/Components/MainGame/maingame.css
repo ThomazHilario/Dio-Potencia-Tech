@@ -126,17 +126,19 @@
 
     font-weight: bold;
     font-size: 30px;
-
-    cursor: pointer;
 }
 
 /* btn resetGame */
 #resetGame{
     display: none;
+    font-family: fantasy;
 
     width: 200px;
-    height: 40px;
+    height: 60px;
 
-    border-radius: 5px;
+    border-radius: 3px;
     border: 0px;
+
+    background-color: rgb(195, 156, 65);
+    font-size: 30px;
 }
